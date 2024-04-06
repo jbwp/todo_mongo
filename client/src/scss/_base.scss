@@ -1,0 +1,113 @@
+
+
+/* nie pokazuje focus-indicator na kliknięcie myszki na button-ach, na input-ach pokazuje, dla tab-ów pokazuje dla button-ów i inputów */
+*:focus-visible {
+  outline: 3px dashed #228bec;
+  outline-offset: 0;
+}
+/* pokazuje dla buttonów i inputów  */
+// *:focus {
+//   outline: 3px dashed #228bec;
+//   outline-offset: 0;
+// }
+
+
+body {
+  background-color: lightblue;
+}
+
+.container {
+  max-width: $max-width;
+  margin: $main-spacing auto;
+  padding: $main-spacing;
+  background-color: lightgray;
+  width: 30%;
+  h2{
+    background-color: lightgoldenrodyellow;
+  
+  }
+  form {
+    margin-top: $main-spacing;
+    background-color: lightcyan;
+    padding: $main-spacing/3;
+    h2{
+      background-color:transparent;
+    }
+    input {
+      height: $main-spacing*1.5;
+      margin-top: $main-spacing/5;
+    }
+  }
+  button {
+    margin: $main-spacing/3 $main-spacing/4;
+    padding:$main-spacing/4;
+    cursor: pointer;
+  }
+  button:hover{
+    color:blue;
+    font-weight: 600;
+  }
+
+}
+
+.filters {
+  background-color: lightpink;
+  padding-left:  $main-spacing/3;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn_danger {
+  background-color: lightpink;
+}
+
+.btn_lg{
+  background-color: crimson;
+ }
+
+.toggle-btn{
+  background-color: yellow;
+ 
+}
+
+.toggle-btn[aria-pressed="true"]{
+  text-decoration: underline;
+  font-weight: 700;
+  border: 3px dashed red;
+}
+
+.todo-list{
+  border:2px solid black;
+  }
+
+.todo {
+  background-color: lightsteelblue;
+  margin: $main-spacing / 2;
+  padding: $main-spacing / 2;
+}
+
+.todo-label{
+  color:black;
+  margin-left: $main-spacing/2;
+}
+
+
+.c-cb{
+  background-color: lightgreen ;
+  display: flex;
+   align-items: center;
+
+}
+
+.checkbox{
+  width:$main-spacing ;
+  height:$main-spacing ;
+  // cursor: pointer;
+}
+
+.label_lg {
+  background-color: lightskyblue;
+}
+
+
+
