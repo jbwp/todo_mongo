@@ -1,16 +1,5 @@
 const { respondNotFound, respondWithError } = require('./helpers')
-
-let id = 1;
-
-function getId() {
-  let currentId = id;
-  id += 1;
-  return currentId;
-}
-
-function createTodo(name, id = getId(), done = false) {
-  return { id, name, done }
-}
+const { getTodos, createTodo, findAndUpdateTodo, findAndDeleteTodo } = require('./db');
 
 function verifyName(req, res) {
   if (!req.body || !req.body.hasOwnProperty('name')) {
@@ -27,72 +16,64 @@ function verifyName(req, res) {
   return { name }
 }
 
-const todos = [
-  createTodo('Breakfast'),
-  createTodo('Breakfast'),
-]
 
-
-
-function addTodo(todo) {
-  todos.push(todo)
+function verifyDone(req, res) {
+  if (!req.body || !req.body.hasOwnProperty('done')) {
+    return respondWithError(res, 'Done is missing')
+  }
+  let { done } = req.body;
+  if (typeof done !== 'boolean') {
+    return respondWithError(res, 'Done should be a boolean')
+  }
+  return { done }
 }
 
-function findTodo(id) {
-  const numberId = Number(id);
-  return todos.find(todo => todo.id === numberId);
-}
-
-exports.createTodo = createTodo;
-exports.addTodo = addTodo;
-
-exports.getTodos = () => todos;
-
-exports.list = (req, res) => {
-  /* dla wszystkich */
-  // res.set('Access-Control-Allow-Origin', '*');
-  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+exports.list = async (req, res) => {
+  const todos = await getTodos();
   res.json(todos);
 }
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   const cleanName = verifyName(req, res);
   if (!cleanName) {
     return
   }
-  const todo = createTodo(cleanName.name)
-  addTodo(todo);
-  console.log(todos)
+  const todo = await createTodo(cleanName.name)
   res.json(todo);
 };
 
-exports.change = (req, res) => {
+exports.change = async (req, res) => {
   const cleanName = verifyName(req, res);
   if (!cleanName) {
     return
   }
-  const todo = findTodo(req.params.id);
-  if (typeof todo === 'undefined') {
+  const todo = await findAndUpdateTodo(req.params.id, { $set: { 'name': cleanName.name } },);
+
+  if (todo === null) {
     return respondNotFound(res);
   }
-  todo.name = cleanName.name;
   res.json(todo)
 };
 
-exports.delete = (req, res) => {
-  const todo = findTodo(req.params.id);
-  if (typeof todo === 'undefined') {
+exports.delete = async (req, res) => {
+  const todo = await findAndDeleteTodo(req.params.id)
+  if (todo === null) {
     return respondNotFound(res);
   }
-  todos.splice(todos.indexOf(todo), 1)
   res.json(todo);
 }
 
-exports.toggle = (req, res) => {
-  const todo = findTodo(req.params.id);
-  if (typeof todo === 'undefined') {
+exports.toggle = async (req, res) => {
+  const cleanDone = verifyDone(req, res);
+  if (!cleanDone) {
+    return
+  }
+
+  const todo = await findAndUpdateTodo(req.params.id, { $set: { 'done': cleanDone.done } },);
+
+  if (todo === null) {
     return respondNotFound(res);
   }
-  todo.done = !todo.done;
+
   res.json(todo);
 }
