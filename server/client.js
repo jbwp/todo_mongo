@@ -45,7 +45,7 @@ async function main() {
   const db = exports.getDb();
   const collection = db.collection('todos');
   await exports.drop();
-  await collection.insertOne({ name: 'Foo106', done: false });
+  // await collection.insertOne({ name: 'Foo106', done: false });
 
 }
 

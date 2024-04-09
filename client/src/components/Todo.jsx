@@ -16,8 +16,6 @@ const Todo = ({ name, completed, id, toggleTaskCompleted, deleteTask, editTask }
   // console.log(editButtonRef.current);
   // console.log(editFieldRef.current);
 
-
-
   function usePrevious(value) {
     const ref = useRef();
     useEffect(() => {
@@ -74,8 +72,8 @@ const Todo = ({ name, completed, id, toggleTaskCompleted, deleteTask, editTask }
           id={id}
           type='checkbox'
           defaultChecked={completed}
-          onChange={() => {
-            toggleTaskCompleted(id)
+          onChange={(e) => {
+            toggleTaskCompleted(id, e.target.checked)
           }}
           className="checkbox"
         />
