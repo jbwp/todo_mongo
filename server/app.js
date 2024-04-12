@@ -1,6 +1,9 @@
 
 const express = require('express');
+
 const cors = require('cors');
+
+const path = require('path')
 
 const { respondNotFound } = require('./helpers')
 
@@ -8,11 +11,14 @@ const todoApi = require('./todoApi.js')
 
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 app.set('x-powered-by', false);
+
 app.use(express.json());
+
 /* dla wszystkich */
 app.use(cors());
-
 // const options = {
 //   origin: 'http://localhost:3000',
 // }

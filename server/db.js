@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb');
 
 const { getDb } = require('./client');
 
-const collectionName = 'todos';
+const collectionName = process.env.COLLECTION_NAME || 'todos';
 
 function getId(id) {
   return ObjectId.isValid(id) ? new ObjectId(id) : null;

@@ -1,9 +1,12 @@
 const { MongoClient } = require('mongodb');
 
-const url = 'mongodb://localhost:27017';
+// const url = 'mongodb://localhost:27017';
 
-// const dbName = process.env.DBNAME || 'test-todos';
-const dbName = 'test-todos';
+require('./loadEnvironment.js');
+
+const url = process.env.ATLAS_URI || " ";
+
+const dbName = process.env.DBNAME || 'test-todos';
 
 let client = null;
 
