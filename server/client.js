@@ -6,6 +6,8 @@ require('./loadEnvironment.js');
 
 const url = process.env.ATLAS_URI || " ";
 
+console.log(url);
+
 const dbName = process.env.DBNAME || 'test-todos';
 
 let client = null;

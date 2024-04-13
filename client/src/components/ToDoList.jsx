@@ -189,7 +189,7 @@ const ToDoList = (props) => {
 
   useEffect(() => {
     async function getTasks() {
-      const response = await fetch(`http://localhost:3001/`);
+      const response = await fetch("http://localhost:3001/");
       if (!response.ok) {
         const message = `An error occurred:${response.statusText}`
         window.alert(message);

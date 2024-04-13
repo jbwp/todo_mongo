@@ -29,18 +29,18 @@ body {
   form {
     margin-top: $main-spacing;
     background-color: lightcyan;
-    padding: $main-spacing/3;
+    padding: calc($main-spacing/3);
     h2{
       background-color:transparent;
     }
     input {
       height: $main-spacing*1.5;
-      margin-top: $main-spacing/5;
+      margin-top: calc($main-spacing/5);
     }
   }
   button {
-    margin: $main-spacing/3 $main-spacing/4;
-    padding:$main-spacing/4;
+    margin: calc($main-spacing/3) calc($main-spacing/4);
+    padding: calc($main-spacing/4);
     cursor: pointer;
   }
   button:hover{
@@ -52,7 +52,7 @@ body {
 
 .filters {
   background-color: lightpink;
-  padding-left:  $main-spacing/3;
+  padding-left:  calc($main-spacing / 3);
   display: flex;
   justify-content: flex-start;
 }
@@ -82,13 +82,13 @@ body {
 
 .todo {
   background-color: lightsteelblue;
-  margin: $main-spacing / 2;
-  padding: $main-spacing / 2;
+  margin: calc($main-spacing / 2);
+  padding: calc($main-spacing / 2);
 }
 
 .todo-label{
   color:black;
-  margin-left: $main-spacing/2;
+  margin-left: calc($main-spacing / 2);
 }
 
 
