@@ -32,13 +32,13 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/tasks/', todoApi.list);
 
-app.post('/', todoApi.create);
+app.post('/tasks/', todoApi.create);
 
-app.put('/:id', todoApi.change);
+app.put('/tasks/:id', todoApi.change);
 
-app.delete('/:id', todoApi.delete);
+app.delete('/tasks/:id', todoApi.delete);
 
-app.post('/:id/toggle', todoApi.toggle);
+app.post('/tasks/:id/toggle', todoApi.toggle);
 
 
 

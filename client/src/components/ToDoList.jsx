@@ -58,7 +58,7 @@ const ToDoList = (props) => {
 
     const newTask = { name };
     try {
-      const response = await fetch("http://localhost:3001/", {
+      const response = await fetch("/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const ToDoList = (props) => {
   async function toggleTaskCompleted(id, completed) {
 
     try {
-      const response = await fetch(`http://localhost:3001/${id}/toggle`, {
+      const response = await fetch(`tasks/${id}/toggle`, {
         method: "POST",
         body: JSON.stringify({ done: completed }),
         headers: {
@@ -119,7 +119,7 @@ const ToDoList = (props) => {
 
   async function editTask(id, newName) {
     try {
-      const response = await fetch(`http://localhost:3001/${id}`, {
+      const response = await fetch(`tasks/${id}`, {
         method: "PUT",
         body: JSON.stringify({ name: newName }),
         headers: {
@@ -152,7 +152,7 @@ const ToDoList = (props) => {
   }
 
   async function deleteTask(id) {
-    await fetch(`http://localhost:3001/${id}`, {
+    await fetch(`/tasks/${id}`, {
       method: "DELETE",
     })
     const remainingTasks = tasks.filter((task) => task._id !== id);
@@ -189,8 +189,8 @@ const ToDoList = (props) => {
 
   useEffect(() => {
     async function getTasks() {
-      const response = await fetch("http://localhost:3001/tasks");
-      // const response = await fetch("/tasks"); /* tylko z dopisanym proxy w package.json */
+      // const response = await fetch("http://localhost:3001/tasks");
+      const response = await fetch("/tasks"); /* tylko z dopisanym proxy w package.json */
       console.log(response);
       if (!response.ok) {
         const message = `An error occurred:${response.statusText}`
