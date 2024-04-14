@@ -1,5 +1,6 @@
-
 const express = require('express');
+
+const bodyParser = require('body-parser');
 
 const cors = require('cors');
 
@@ -9,21 +10,23 @@ const { respondNotFound } = require('./helpers')
 
 const todoApi = require('./todoApi.js')
 
+
 const app = express();
-
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-
-app.set('x-powered-by', false);
-
-app.use(express.json());
-
-/* dla wszystkich */
+app.use(bodyParser.json());
 app.use(cors());
 // const options = {
 //   origin: 'http://localhost:3000',
 // }
 // app.use(cors(options))
 
+app.set('x-powered-by', false);
+
+
+/* dla wszystkich */
+
+app.use(express.json());
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/', todoApi.list);
 
@@ -34,6 +37,8 @@ app.put('/:id', todoApi.change);
 app.delete('/:id', todoApi.delete);
 
 app.post('/:id/toggle', todoApi.toggle);
+
+
 
 app.get('*', (req, res) => {
   respondNotFound(res);

@@ -190,13 +190,14 @@ const ToDoList = (props) => {
   useEffect(() => {
     async function getTasks() {
       const response = await fetch("http://localhost:3001/");
+      console.log(response);
       if (!response.ok) {
         const message = `An error occurred:${response.statusText}`
         window.alert(message);
         return;
       }
-
       const tasks = await response.json();
+      console.log(tasks);
       setTasks(tasks);
     }
     getTasks();
@@ -204,7 +205,7 @@ const ToDoList = (props) => {
   }, [location]);
   /* location + navigate (w addTodo) => odświeża after addTask, editTask and toggling */
 
-  return (
+  return tasks ? (
     <div className="container">
       <h1>Todo List</h1>
       <Form addTask={addTask} />
@@ -222,7 +223,7 @@ const ToDoList = (props) => {
         {taskList}
       </ul>
     </div>
-  );
+  ) : (<h3>Loading ...</h3>);
 }
 
 export default ToDoList;

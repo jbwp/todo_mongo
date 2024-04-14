@@ -26,6 +26,7 @@ function getClient() {
 
 exports.connect = async () => {
   client = await MongoClient.connect(url);
+  console.log('connect')
 };
 
 exports.getDb = () => {
