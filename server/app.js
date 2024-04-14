@@ -10,6 +10,9 @@ const { respondNotFound } = require('./helpers')
 
 const todoApi = require('./todoApi.js')
 
+const { connect } = require('./client');
+
+connect();
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,14 +24,13 @@ app.use(cors());
 
 app.set('x-powered-by', false);
 
-
-/* dla wszystkich */
-
 app.use(express.json());
+
+console.log('express static');
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get('/', todoApi.list);
+app.get('/tasks/', todoApi.list);
 
 app.post('/', todoApi.create);
 

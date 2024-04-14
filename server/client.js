@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 // const url = 'mongodb://localhost:27017';
+/* testy są robione na DB Compass */
 
 require('./loadEnvironment.js');
 
@@ -26,7 +27,7 @@ function getClient() {
 
 exports.connect = async () => {
   client = await MongoClient.connect(url);
-  console.log('connect')
+  console.log('connected do db')
 };
 
 exports.getDb = () => {

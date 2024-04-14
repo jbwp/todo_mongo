@@ -189,7 +189,8 @@ const ToDoList = (props) => {
 
   useEffect(() => {
     async function getTasks() {
-      const response = await fetch("http://localhost:3001/");
+      const response = await fetch("http://localhost:3001/tasks");
+      // const response = await fetch("/tasks"); /* tylko z dopisanym proxy w package.json */
       console.log(response);
       if (!response.ok) {
         const message = `An error occurred:${response.statusText}`

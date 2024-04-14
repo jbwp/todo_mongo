@@ -10,7 +10,7 @@ afterAll(disconnect);
 beforeEach(drop);
 
 test('works', async () => {
-  const response = await request(app).get('/');
+  const response = await request(app).get('/tasks/');
   expect(response.status).toEqual(200);
   expect(response.header['content-type']).toEqual('application/json; charset=utf-8')
 })
