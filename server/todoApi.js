@@ -30,6 +30,7 @@ function verifyDone(req, res) {
 
 exports.list = async (req, res) => {
   const todos = await getTodos();
+  console.log(list);
   res.json(todos);
 }
 
